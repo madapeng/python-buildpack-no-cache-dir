@@ -131,13 +131,13 @@ func RunPython(s *Supplier) error {
 		return err
 	}
 
-	s.Log.Info("------------------- {} -------------------".format(filepath.Join(s.Stager.BuildDir(), "vendor")))
+	s.Log.Info("------------------- " + filepath.Join(s.Stager.BuildDir(), "vendor") + " -------------------")
 	vendored, err := libbuildpack.FileExists(filepath.Join(s.Stager.BuildDir(), "vendor"))
 	if err != nil {
 		return fmt.Errorf("could not check vendor existence: %v", err)
 	}
 
-	s.Log.Info("------------------- vendored {} -------------------".format(vendored))
+	s.Log.Info("------------------- vendored " + vendored + " -------------------")
 	if vendored {
 		if err := s.RunPipVendored(); err != nil {
 			s.Log.Error("Could not install vendored pip packages: %v", err)
