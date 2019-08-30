@@ -139,7 +139,11 @@ func RunPython(s *Supplier) error {
 
 	s.Log.Info(fmt.Sprintf("------------------- vendored: %t -------------------", vendored))
 	if vendored {
-		if err := s.RunPipVendored(); err != nil {
+		if err := s.RunPipVendored(true); err != nil {
+			s.Log.Error("Could not install vendored pip packages: %v", err)
+			return err
+		}
+		if err := s.RunPipVendored(false); err != nil {
 			s.Log.Error("Could not install vendored pip packages: %v", err)
 			return err
 		}
@@ -611,8 +615,11 @@ func (s *Supplier) RunPipUnvendored() error {
 	return s.Stager.LinkDirectoryInDepDir(filepath.Join(s.Stager.DepDir(), "python", "bin"), "bin")
 }
 
-func (s *Supplier) RunPipVendored() error {
+func (s *Supplier) RunPipVendored(useVendorRequirements) error {
 	shouldContinue, requirementsPath, err := s.shouldRunPip()
+	if useVendorRequirements {
+		strings.Replace(requirementsPath, "requirements.txt", "vendor_requirements.txt", 1)
+	}
 	s.Log.Info(fmt.Sprintf(" ------------------------ requirementsPath: %s -------------------------", requirementsPath))
 	if err != nil {
 		return err
