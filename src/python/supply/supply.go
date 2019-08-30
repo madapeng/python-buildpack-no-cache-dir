@@ -600,6 +600,7 @@ func (s *Supplier) RunPipUnvendored() error {
 		return err
 	}
 
+	s.Log.Info(" ------------------------ run install -r requirement.txt -------------------------")
 	installArgs := []string{"-m", "pip", "install", "-r", requirementsPath, "--no-cache-dir", "--ignore-installed", "--exists-action=w", "--src=" + filepath.Join(s.Stager.DepDir(), "src")}
 	if err := s.Command.Execute(s.Stager.BuildDir(), indentWriter(os.Stdout), indentWriter(os.Stderr), "python", installArgs...); err != nil {
 		return fmt.Errorf("could not run pip: %v", err)
