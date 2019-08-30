@@ -615,7 +615,7 @@ func (s *Supplier) RunPipUnvendored() error {
 	return s.Stager.LinkDirectoryInDepDir(filepath.Join(s.Stager.DepDir(), "python", "bin"), "bin")
 }
 
-func (s *Supplier) RunPipVendored(useVendorRequirements) error {
+func (s *Supplier) RunPipVendored(useVendorRequirements bool) error {
 	shouldContinue, requirementsPath, err := s.shouldRunPip()
 	if useVendorRequirements {
 		strings.Replace(requirementsPath, "requirements.txt", "vendor_requirements.txt", 1)
