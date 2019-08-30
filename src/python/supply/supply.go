@@ -640,6 +640,7 @@ func (s *Supplier) RunPipVendored() error {
 		"--no-index",
 		"--find-links=file://" + filepath.Join(s.Stager.BuildDir(), "vendor"),
 	}
+	s.Log.Info(fmt.Sprintf("------------------- %s -------------------", installArgs.Join(" ")))
 
 	if s.hasBuildOptions() {
 		s.Log.Info("Using the pip --no-build-isolation flag since it is available")
