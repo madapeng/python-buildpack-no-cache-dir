@@ -139,11 +139,11 @@ func RunPython(s *Supplier) error {
 
 	s.Log.Info(fmt.Sprintf("------------------- vendored: %t -------------------", vendored))
 	if vendored {
-		if err := s.RunPipVendored(false); err != nil {
+		if err := s.RunPipVendored(true); err != nil {
 			s.Log.Error("Could not install vendored pip packages: %v", err)
 			return err
 		}
-		if err := s.RunPipVendored(true); err != nil {
+		if err := s.RunPipVendored(false); err != nil {
 			s.Log.Error("Could not install vendored pip packages: %v", err)
 			return err
 		}
