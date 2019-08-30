@@ -618,9 +618,9 @@ func (s *Supplier) RunPipUnvendored() error {
 func (s *Supplier) RunPipVendored(useVendorRequirements bool) error {
 	shouldContinue, requirementsPath, err := s.shouldRunPip()
 	if useVendorRequirements {
-		strings.Replace(requirementsPath, "requirements.txt", "vendor_requirements.txt", 1)
+		requirementsPath = strings.Replace(requirementsPath, "requirements.txt", "vendor_requirements.txt", 1)
 	}
-	s.Log.Info(fmt.Sprintf(" ------------------------ requirementsPath: %s -------------------------", requirementsPath))
+	s.Log.Info(fmt.Sprintf(" ------------------------ [%t] requirementsPath: %s -------------------------", useVendorRequirements, requirementsPath))
 	if err != nil {
 		return err
 	} else if !shouldContinue {
