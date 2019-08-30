@@ -137,7 +137,7 @@ func RunPython(s *Supplier) error {
 		return fmt.Errorf("could not check vendor existence: %v", err)
 	}
 
-	s.Log.Info("------------------- vendored " + vendored + " -------------------")
+	s.Log.Info("------------------- vendored " + strconv.FormatBool(vendored) + " -------------------")
 	if vendored {
 		if err := s.RunPipVendored(); err != nil {
 			s.Log.Error("Could not install vendored pip packages: %v", err)
